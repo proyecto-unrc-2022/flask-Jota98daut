@@ -21,3 +21,8 @@ Feature: Handle storing, retrieving and deleting customer details # test/feature
     And the new user details are returned:
       | name        |
       | John Lennon |
+
+  Scenario: Remove an user
+    Given the user 'jlennon' is in the system
+    When I receive a request to delete 'jlennon'
+    Then the system informs the user was deleted

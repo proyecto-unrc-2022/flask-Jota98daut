@@ -59,3 +59,12 @@ def step_impl(context):
 @then('the new user details are returned')
 def step_impl(context):
     assert "John Lennon" in context.page.text
+
+@when(u"I receive a request to delete '{uname}'")
+def step_impl(context, uname):
+    context.page = context.client.delete('/users/{}'.format(uname))
+    assert context.page
+
+@then("the system informs the user was deleted")
+def step_impl(context):
+    assert context.page.status_code is 200
