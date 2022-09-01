@@ -13,3 +13,11 @@ Feature: Handle storing, retrieving and deleting customer details # test/feature
     When I receive a POST request on '/users' with the username "freddy"
     Then the user "freddy" should be added
     And I should get a '201' response
+
+  Scenario: Update an user
+    Given The user 'jlennon' is in the system
+    When I receive new information for the user 'jlennon'
+    Then the system informs the user was updated
+    And the new user details are returned:
+      | name        |
+      | John Lennon |
