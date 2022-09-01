@@ -26,3 +26,12 @@ Feature: Handle storing, retrieving and deleting customer details # test/feature
     Given the user 'jlennon' is in the system
     When I receive a request to delete 'jlennon'
     Then the system informs the user was deleted
+
+  Scenario: List all the users
+    Given some users are in the system
+    When I receive a request to show the users list
+    Then the following data is returned:
+      | username | name          |
+      | jasonb   | Jason Bourne  |
+      | mattd    | Matt Damon    |
+      | darin    | Ricardo Darin |

@@ -30,9 +30,11 @@ def access_users(username):
         else:
             return Response(status=404)
 
-@app.route("/users", methods=['POST'])
+@app.route("/users", methods=['GET','POST'])
 def users():
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return jsonify(USERS)
+    elif request.method == 'POST':
         if request.form['username'] not in USERS:
             USERS.update({request.form['username']: {'name': request.form['name']}})
             return Response(status=201)

@@ -5,6 +5,8 @@ from application import USERS
 @given('some users are in the system')
 def step_impl(context):
     USERS.update({'jasonb': {'name': 'Jason Bourne'}})
+    USERS.update({'mattd': {'name': 'Matt Damon'}})
+    USERS.update({'darin': {'name': 'Ricardo Darin'}})
 
 @when(u'I retrieve the customer \'jasonb\'')
 def step_impl(context):
@@ -68,3 +70,13 @@ def step_impl(context, uname):
 @then("the system informs the user was deleted")
 def step_impl(context):
     assert context.page.status_code is 200
+
+@when("I receive a request to show the users list")
+def step_impl(context):
+    context.page = context.client.get('/users')
+    assert context.page
+
+@then("the following data is returned")
+def step_impl(context):
+    for row in context.table:
+        assert row[0] in context.page.text
